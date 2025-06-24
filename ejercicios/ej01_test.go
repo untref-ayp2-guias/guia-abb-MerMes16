@@ -36,5 +36,5 @@ func TestNilSecLargeElem(t *testing.T) {
 	bst := binarytree.NewBinarySearchTree[int]()
 
 	_, err := SecondLargestElement(bst)
-	assert.EqualError(t, err, "No hay valores")
+	assert.EqualError(t, err, "no hay valores")
 }

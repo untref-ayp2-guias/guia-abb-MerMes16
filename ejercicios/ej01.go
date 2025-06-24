@@ -7,20 +7,20 @@ import (
 
 func SecondLargestElement(bt *binarytree.BinarySearchTree[int]) (int, error) {
 	if bt == nil {
-		return 0, errors.New("No hay valores")
+		return 0, errors.New("no hay valores")
 	}
 	return findSecLargeElem(bt.GetRoot())
 }
 
 func findSecLargeElem(n *binarytree.BinaryNode[int]) (int, error) {
 	if n == nil {
-		return 0, errors.New("No hay valores")
+		return 0, errors.New("no hay valores")
 	}
 
 	right := n.GetRight()
 	if left := n.GetLeft(); right == nil {
 		if left == nil {
-			return 0, errors.New("No hay valores")
+			return 0, errors.New("no hay valores")
 		}
 		return left.GetData(), nil
 	}
