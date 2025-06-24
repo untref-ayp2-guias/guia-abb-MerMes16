@@ -1,6 +1,7 @@
 package ejercicios
 
 import (
+	"errors"
 	"untref-ayp2/guia-abb/binarytree"
 	"untref-ayp2/guia-abb/stack"
 
@@ -20,19 +21,38 @@ type BSTPostOrderIterator[T constraints.Ordered] struct {
 // Retorna:
 //   - un Iterator.
 func NewBSTPostOrderIterator[T constraints.Ordered](bst *binarytree.BinarySearchTree[T]) Iterator[T] {
-	// Implementar
-	return nil
+	it := &BSTPostOrderIterator[T]{
+		internalStack: stack.NewStack[*binarytree.BinaryNode[T]](),
+	}
+	postOrder(it.internalStack, bst.GetRoot())
+
+	return it
+}
+
+func postOrder[T constraints.Ordered](stack *stack.Stack[*binarytree.BinaryNode[T]], root *binarytree.BinaryNode[T]) *stack.Stack[*binarytree.BinaryNode[T]] {
+	if root == nil {
+		return stack
+	}
+	stack.Push(root)
+	stack = postOrder(stack, root.GetRight())
+	stack = postOrder(stack, root.GetLeft())
+
+	return stack
 }
 
 // HasNext indica si hay un siguiente dato.
 func (it *BSTPostOrderIterator[T]) HasNext() bool {
-	// Implementar
-	return false
+	return !it.internalStack.IsEmpty()
 }
 
 // Next devuelve el siguiente dato, respetando el recorrido PostOrder.
 func (it *BSTPostOrderIterator[T]) Next() (T, error) {
-	// Implementar
-	var zero T
-	return zero, nil
+	if !it.HasNext() {
+		var zero T
+		err := errors.New("árbol vacío")
+		return zero, err
+	}
+	node, _ := it.internalStack.Pop()
+
+	return node.GetData(), nil
 }
