@@ -5,11 +5,20 @@ import (
 )
 
 func IsBst(bt *binarytree.BinaryTree[int]) bool {
-	// Implementar
-	return false
+	if bt == nil {
+		return true
+	}
+	return isBstByNode(bt.GetRoot())
 }
 
 func isBstByNode(n *binarytree.BinaryNode[int]) bool {
-	// Implementar
-	return false
+	if n == nil {
+		return true
+	}
+
+	if (n.GetLeft() != nil && n.GetData() <= n.GetLeft().GetData()) || (n.GetRight() != nil && n.GetData() >= n.GetRight().GetData()) {
+		return false
+	}
+
+	return isBstByNode(n.GetLeft()) && isBstByNode(n.GetRight())
 }
