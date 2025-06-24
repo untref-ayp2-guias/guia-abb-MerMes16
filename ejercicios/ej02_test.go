@@ -29,7 +29,7 @@ func TestPredecesorBst(t *testing.T) {
 	bst.Insert(25)
 
 	_, err := PredecesorInOrder(bst, 8)
-	assert.EqualError(t, err, "No hay predecesores menores que el mínimo")
+	assert.EqualError(t, err, "no hay predecesores menores que el mínimo")
 	p, _ := PredecesorInOrder(bst, 10)
 	assert.Equal(t, 8, p)
 	p, _ = PredecesorInOrder(bst, 12)
@@ -48,7 +48,7 @@ func TestNilPredecesorBst(t *testing.T) {
 	bst := binarytree.NewBinarySearchTree[int]()
 
 	_, err := PredecesorInOrder(bst, 16)
-	assert.EqualError(t, err, "No hay predecesores")
+	assert.EqualError(t, err, "no hay predecesores menores que el mínimo")
 }
 
 func TestUnoSoloPredecesorBst(t *testing.T) {
@@ -56,5 +56,5 @@ func TestUnoSoloPredecesorBst(t *testing.T) {
 	bst.Insert(100)
 
 	_, err := PredecesorInOrder(bst, 16)
-	assert.EqualError(t, err, "No hay predecesores menores que el mínimo")
+	assert.EqualError(t, err, "no hay predecesores menores que el mínimo")
 }
